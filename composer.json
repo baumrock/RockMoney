@@ -1,0 +1,10 @@
+{
+  "require": {
+    "moneyphp/money": "^4.1"
+  },
+  "config": {
+    "platform": {
+      "php": "8.0"
+    }
+  }
+}
