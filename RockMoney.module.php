@@ -2,10 +2,8 @@
 
 namespace ProcessWire;
 
-use Money\Currencies\ISOCurrencies;
 use Money\Currency;
-use Money\Formatter\DecimalMoneyFormatter;
-use Money\Money;
+use RockMoney\Money;
 
 /**
  * @author Bernhard Baumrock, 19.02.2023
@@ -16,6 +14,8 @@ class RockMoney extends WireData implements Module, ConfigurableModule
 {
   public $decimal = ",";
   public $thousands = ".";
+  public $suffix = "€";
+  public $prefix = "";
   public $currency;
   public $currencyStr = "EUR";
   public $money;
@@ -38,80 +38,19 @@ class RockMoney extends WireData implements Module, ConfigurableModule
 
   public function init()
   {
+    require_once "Money.php";
     require_once "vendor/autoload.php";
     $this->wire('money', $this);
     $this->currency = new Currency($this->currencyStr);
   }
 
   /**
-   * Format money as string
-   */
-  public function format(): string
-  {
-    if (!$this->money) return '';
-    $currencies = new ISOCurrencies();
-    $moneyFormatter = new DecimalMoneyFormatter($currencies);
-    return $moneyFormatter->format($this->money) . " " . $this->currency;
-  }
-
-  /**
    * Create and return a new RockMoney\Money object
    */
-  public function parse($data): self
+  public function parse($data, $decimal = null): Money
   {
-    // if it is already a money object we save it and return
-    if ($data instanceof Money) {
-      $this->money = $data;
-      return $this;
-    }
-
-    // not a money object, so we make sure it is a string
-    $data = (string)$data;
-    $data = $this->sanitize($data);
-    // bd($data, 'sanitized');
-    $data = $this->toCents($data);
-    $this->money = new Money($data, $this->currency);
-
-    return $this;
-  }
-
-  public function sanitize($str): string
-  {
-    $str = str_replace(",-", "", $str);
-    $str = str_replace("€", "", $str);
-    $str = str_replace("$", "", $str);
-    $str = $this->normalizeDecimal($str);
-    return $str;
-  }
-
-  /**
-   * Convert string to cent amount ready for creating money object
-   * 1.5 --> 150
-   * 1234.50 --> 123450
-   */
-  public function toCents($str): string
-  {
-    $parts = explode(".", $str);
-    if (count($parts) === 1) $parts[1] = '00';
-    $parts[1] = str_pad($parts[1], 2, "0", STR_PAD_RIGHT);
-    return implode("", $parts);
-  }
-
-  /**
-   * Normalize the decimal to a dot and remove thousands separators from string.
-   * This assumes that a comma or dot followed by 3 numbers represents a thousands
-   * separator and can therefore be removed. The decimal separator can then be
-   * normalized to a dot, which will work for casting to floats
-   */
-  public static function normalizeDecimal($str): string
-  {
-    // first we remove the thousands separator
-    $str = preg_replace('/(?<=\d)[,.](?=\d{3}\b)/', '', $str);
-    // then we make sure we have a dot as decimal point
-    $str = str_replace(",", ".", $str);
-    // remove whitespaces
-    $str = str_replace(" ", "", $str);
-    return $str;
+    if ($data instanceof Money) return $data;
+    return new Money($data, $decimal);
   }
 
   /** config */
@@ -300,12 +239,6 @@ class RockMoney extends WireData implements Module, ConfigurableModule
     $inputfields->add($fs);
 
     $fs->add([
-      'type' => 'markup',
-      'label' => 'Example',
-      'value' => "xxx",
-      // 'icon' => 'money',
-    ]);
-    $fs->add([
       'type' => 'text',
       'name' => 'thousands',
       'label' => 'Thousands Separator',
@@ -339,18 +272,13 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       'label' => 'Space between symbol and number',
       'checked' => $this->space ? 'checked' : '',
     ]);
+    $fs->add([
+      'type' => 'markup',
+      'label' => 'Examples',
+      'value' => $this->wire->files->render(__DIR__ . "/examples.php"),
+      // 'icon' => 'money',
+    ]);
 
     return $inputfields;
-  }
-
-  public function __debugInfo()
-  {
-    return [
-      // 'format()' => $this->format(),
-      'thousands' => $this->thousands,
-      'decimal' => $this->decimal,
-      'money' => $this->money,
-      'currency' => $this->currency,
-    ];
   }
 }

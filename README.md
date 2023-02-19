@@ -15,23 +15,61 @@ echo $money
 
 ## Why?
 
-Because using floats can lead to severe bugs!
+Because using floats can lead to severe problems! Compare the previous examle with this one:
 
 ```php
 $x = 1.4;
 $y = 0.4;
-db($x - $y); // 0.9999999999999999
+db($x - $y); // 0.9999999999999999 (not 1)
 ```
 
 ## Parsing
 
 ## Formatting
 
+All money objects will be automatically formatted according to the module settings.
+
+#### String Casting
+
+RockMoney objects will automatically format themselves when requested for output:
+
+```php
+$net = $money->parse(100);
+bd($net); // RockMoney\Money object
+echo $net; // 100,00€
 ```
-Number: 9988776.65
-FR: 9 988 776,65
-DE: 9.988.776,65
-US: 9,988,776.65
+
+## Calculations
+
+```php
+$money
+  ->parse("14,40")
+  ->plus(3)
+  ->minus(0.4)
+  ->format(); // 17,00€
+```
+
+### Immutability
+
+Note that every calculation will return a new money object instead of modifying the original object. This is important for situations like this one:
+
+```php
+$net = $money->parse("1.499");
+$vat = $net->times(0.2); // $net is still 1499
+$gross = $net->plus($vat); // $net is still 1499
+echo "net: $net"; // 1.499,00€
+echo "vat: $vat"; // 299,80€
+echo "gross: $gross"; // 1.798,80€
+```
+
+## Comparisons
+
+```php
+$net = $money->parse(100);
+$vat = $net->times(0.2);
+$gross = $net->times(1.2);
+$gross2 = $net->plus($vat);
+bd($gross->isEqual($gross2)); // true
 ```
 
 ## Links
