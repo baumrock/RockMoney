@@ -32,7 +32,10 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       'requires' => [
         'PHP>=8.0',
       ],
-      'installs' => [],
+      'installs' => [
+        'FieldtypeRockMoney',
+        'InputfieldRockMoney',
+      ],
     ];
   }
 
@@ -41,7 +44,10 @@ class RockMoney extends WireData implements Module, ConfigurableModule
     require_once "Money.php";
     require_once "vendor/autoload.php";
     $this->wire('money', $this);
-    $this->currency = new Currency($this->currencyStr);
+    try {
+      $this->currency = new Currency($this->currencyStr);
+    } catch (\Throwable $th) {
+    }
   }
 
   /**

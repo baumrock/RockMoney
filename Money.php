@@ -2,8 +2,6 @@
 
 namespace RockMoney;
 
-use Money\Currencies\ISOCurrencies;
-use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money as MoneyMoney;
 use ProcessWire\RockMoney;
 use ProcessWire\Wire;
@@ -31,7 +29,7 @@ class Money extends Wire
     }
 
     // first we remove all non-numeric and non-dot values
-    $str = preg_replace('/[^0-9,.]+/', '', $str);
+    $str = preg_replace('/[^0-9,.]+/', '', (string)$str);
 
     // decimal parser
     if ($decimal == ".") {
@@ -74,7 +72,7 @@ class Money extends Wire
 
     // create MoneyPhp object
     $curr = $this->rockmoney()->currency;
-    $money = new MoneyMoney($str, $curr);
+    $money = new MoneyMoney($str ?: 0, $curr);
     $this->money = $money;
 
     return $this;
@@ -104,6 +102,12 @@ class Money extends Wire
     $space = $space ? " " : "";
     $str = $prefix . $space . $str . $space . $suffix;
     return trim($str);
+  }
+
+  public function getFloat(): float
+  {
+    if (!$this->money) return 0;
+    return $this->money->getAmount() / 100;
   }
 
   /** calculations */
