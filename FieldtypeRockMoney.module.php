@@ -2,12 +2,14 @@
 
 namespace ProcessWire;
 
+use RockMoney\Money;
+
 /**
  * @author Bernhard Baumrock, 19.02.2023
  * @license Licensed under MIT
  * @link https://www.baumrock.com
  */
-class FieldtypeRockMoney extends FieldtypeText
+class FieldtypeRockMoney extends FieldtypeFloat
 {
 
   public static function getModuleInfo()
@@ -31,9 +33,14 @@ class FieldtypeRockMoney extends FieldtypeText
 
   /** FIELDTYPE METHODS */
 
-  public function wakeupValue($page, $field, $value)
+  public function ___formatValue(Page $page, Field $field, $value)
   {
     return $this->rockmoney()->parse($value);
+  }
+
+  public function getBlankValue(Page $page, Field $field)
+  {
+    return $this->rockmoney()->parse(0);
   }
 
   public function getInputfield(Page $page, Field $field)
@@ -43,7 +50,13 @@ class FieldtypeRockMoney extends FieldtypeText
 
   public function ___sleepValue(Page $page, Field $field, $value)
   {
-    return $value->getFloat();
+    if ($value instanceof Money) return $value->getFloat();
+    return (float)$value;
+  }
+
+  public function wakeupValue($page, $field, $value)
+  {
+    return $this->rockmoney()->parse($value);
   }
 
   /**
@@ -56,7 +69,7 @@ class FieldtypeRockMoney extends FieldtypeText
    */
   public function sanitizeValue(Page $page, Field $field, $value)
   {
-    return $value;
+    return $this->rockmoney()->parse($value);
   }
 
   /** HELPER METHODS */

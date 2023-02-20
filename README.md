@@ -20,7 +20,7 @@ Because using floats can lead to severe problems! Compare the previous examle wi
 ```php
 $x = 1.4;
 $y = 0.4;
-db($x - $y); // 0.9999999999999999 (not 1)
+db($x - $y); // 0.9999999999999999 (not 1!)
 ```
 
 ## Parsing
@@ -70,6 +70,13 @@ $vat = $net->times(0.2);
 $gross = $net->times(1.2);
 $gross2 = $net->plus($vat);
 bd($gross->isEqual($gross2)); // true
+```
+
+## Fieldtype
+
+```php
+// find invoices with net value smaller than 100€
+$pages->find("template=invoice, net<100");
 ```
 
 ## Links

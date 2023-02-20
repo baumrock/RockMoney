@@ -62,7 +62,7 @@ class InputfieldRockMoney extends InputfieldText
   public function ___processInput($input)
   {
     $val = $input->get($this->name);
-    $money = $this->rockmoney()->parse($val);
+    $money = $this->rockmoney()->parse($val ?: 0);
     $input->set($this->name, $money);
     parent::___processInput($input);
   }
