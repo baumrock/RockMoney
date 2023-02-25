@@ -24,7 +24,7 @@ class RockMoney extends WireData implements Module, ConfigurableModule
   {
     return [
       'title' => 'RockMoney',
-      'version' => '0.0.1',
+      'version' => '1.0.0',
       'summary' => 'ProcessWire Module to provide tools for storing and using monetary values in an easy, yet powerful way.',
       'autoload' => true,
       'singular' => true,

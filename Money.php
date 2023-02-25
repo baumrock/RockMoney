@@ -144,28 +144,33 @@ class Money extends Wire
 
   /** comparison */
 
-  public function isLessThan(Money $money): bool
+  public function isLessThan($money): bool
   {
+    $money = $this->rockmoney()->parse($money);
     return $this->money->lessThan($money->money);
   }
 
-  public function isLessThanOrEqual(Money $money): bool
+  public function isLessThanOrEqual($money): bool
   {
+    $money = $this->rockmoney()->parse($money);
     return $this->money->lessThanOrEqual($money->money);
   }
 
-  public function isEqual(Money $money): bool
+  public function isEqual($money): bool
   {
+    $money = $this->rockmoney()->parse($money);
     return $this->money->equals($money->money);
   }
 
-  public function isGreaterThanOrEqual(Money $money): bool
+  public function isGreaterThanOrEqual($money): bool
   {
+    $money = $this->rockmoney()->parse($money);
     return $this->money->greaterThanOrEqual($money->money);
   }
 
-  public function isGreaterThan(Money $money): bool
+  public function isGreaterThan($money): bool
   {
+    $money = $this->rockmoney()->parse($money);
     return $this->money->greaterThan($money->money);
   }
 
