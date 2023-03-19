@@ -20,25 +20,6 @@ class RockMoney extends WireData implements Module, ConfigurableModule
   public $currencyStr = "EUR";
   public $money;
 
-  public static function getModuleInfo()
-  {
-    return [
-      'title' => 'RockMoney',
-      'version' => '1.0.0',
-      'summary' => 'ProcessWire Module to provide tools for storing and using monetary values in an easy, yet powerful way.',
-      'autoload' => true,
-      'singular' => true,
-      'icon' => 'money',
-      'requires' => [
-        'PHP>=8.0',
-      ],
-      'installs' => [
-        'FieldtypeRockMoney',
-        'InputfieldRockMoney',
-      ],
-    ];
-  }
-
   public function init()
   {
     require_once "Money.php";
