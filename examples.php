@@ -11,7 +11,7 @@
   }
 </style>
 
-<pre><code> // if you provide a string with tree numbers after a dot or comma it will be parsed as thousands!
+<pre><code> // if you provide a string with three numbers after a dot or comma it will be parsed as thousands!
 echo $money->parse("1.001")->format();</code></pre>
 <p class=result><?= $money->parse("1.001")->format() ?></p>
 
@@ -36,8 +36,8 @@ var_dump(1.4 - 0.4)</code></pre>
 <pre><code>echo $money->parse(9.9)->times(1.2)->format();</code></pre>
 <p class=result><?= $money->parse(9.9)->times(1.2)->format() ?></p>
 
-<pre><code>echo $money->parse("€ 1,234,567,890,-")->format();</code></pre>
-<p class=result><?= $money->parse("€ 1,234,567,890,-")->format() ?></p>
+<pre><code>echo $money->parse("€ 1,234")->format();</code></pre>
+<p class=result><?= $money->parse("€ 1,234")->format() ?></p>
 
 <pre><code>echo $money->parse("5,5")->times(3)->minus(2.5)->plus(0.2)->format();</code></pre>
 <p class=result><?= $money->parse("5,5")->times(3)->minus(2.5)->plus(0.2)->format() ?></p>
