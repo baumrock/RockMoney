@@ -107,6 +107,14 @@ class Money extends Wire
     return trim($str);
   }
 
+  /**
+   * Get a string in the format that mollie needs it
+   */
+  public function formatMollie(): string
+  {
+    return number_format($this->getFloat(), 2, ".", "");
+  }
+
   public function getFloat(): float
   {
     if (!$this->money) return 0;
