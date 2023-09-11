@@ -30,7 +30,9 @@ class Money extends Wire
 
     // first we remove all non-numeric and non-dot values
     // but we keep a starting dash as it means negative values
-    $str = preg_replace('/-[^0-9,.]+/', '', (string)$str);
+    if (preg_match('/-?[0-9.,]+/', $str, $matches)) {
+      $str = $matches[0];
+    }
 
     // decimal parser
     if ($decimal == ".") {
@@ -103,6 +105,14 @@ class Money extends Wire
     $space = $space ? " " : "";
     $str = $prefix . $space . $str . $space . $suffix;
     return trim($str);
+  }
+
+  /**
+   * Get a string in the format that mollie needs it
+   */
+  public function formatMollie(): string
+  {
+    return number_format($this->getFloat(), 2, ".", "");
   }
 
   public function getFloat(): float
