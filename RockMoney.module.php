@@ -10,6 +10,12 @@ use RockMoney\Money;
  * @license Licensed under MIT
  * @link https://www.baumrock.com
  */
+
+function rockmoney(): RockMoney
+{
+  return wire()->modules->get('RockMoney');
+}
+
 class RockMoney extends WireData implements Module, ConfigurableModule
 {
   public $decimal = ",";
