@@ -279,17 +279,6 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       'label' => 'Space between symbol and number',
       'checked' => $this->space ? 'checked' : '',
     ]);
-    try {
-      $examples = $this->wire->files->render(__DIR__ . "/examples.php");
-    } catch (\Throwable $th) {
-      $examples = $th->getMessage();
-    }
-    $fs->add([
-      'type' => 'markup',
-      'label' => 'Examples',
-      'value' => $examples,
-      // 'icon' => 'money',
-    ]);
 
     return $inputfields;
   }
