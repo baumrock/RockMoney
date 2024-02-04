@@ -115,10 +115,25 @@ class Money extends Wire
     return number_format($this->getFloat(), 2, ".", "");
   }
 
+  /**
+   * Get a float rounded to the given number of decimals
+   */
   public function getFloat(): float
   {
     if (!$this->money) return 0;
     return $this->money->getAmount() / 100;
+  }
+
+  /**
+   * Get string of this price ready to be used in json_encode
+   * This is also used for all frontend pricing calculations
+   * so we remove the thousands separator!
+   * This fixes https://stackoverflow.com/questions/41824959/json-encode-adding-lots-of-decimal-digits
+   */
+  public function getString($decimals = 2): string
+  {
+    $float = $this->getFloat();
+    return number_format($float, $decimals, ".", "");
   }
 
   /** calculations */

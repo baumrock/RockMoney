@@ -33,6 +33,10 @@ class InputfieldRockMoney extends InputfieldText
   public function ___render()
   {
     $html = parent::___render();
+    $html = substr($html, 0, -2);
+    $html .= " onfucus='this.select()' onclick='this.select()'";
+    $html .= " onblur='this.value = parseFloat(this.value).toFixed(2)' />";
+    $html .= "<script>$('#{$this->id}').val(parseFloat($('#{$this->id}').val()).toFixed(2))</script>";
     return $html;
   }
 
