@@ -38,11 +38,6 @@ class FieldtypeRockMoney extends FieldtypeFloat
     return $this->rockmoney()->parse($value);
   }
 
-  public function getBlankValue(Page $page, Field $field)
-  {
-    return $this->rockmoney()->parse(0);
-  }
-
   public function getInputfield(Page $page, Field $field)
   {
     return $this->wire->modules->get('InputfieldRockMoney');
@@ -69,6 +64,7 @@ class FieldtypeRockMoney extends FieldtypeFloat
    */
   public function sanitizeValue(Page $page, Field $field, $value)
   {
+    if ($value === '' && $field->zeroNotEmpty) return '';
     return $this->rockmoney()->parse($value);
   }
 

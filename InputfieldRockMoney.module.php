@@ -26,20 +26,6 @@ class InputfieldRockMoney extends InputfieldText
     ];
   }
 
-  /**
-   * Render the Inputfield
-   * @return string
-   */
-  public function ___render()
-  {
-    $html = parent::___render();
-    $html = substr($html, 0, -2);
-    $html .= " onfucus='this.select()' onclick='this.select()'";
-    $html .= " onblur='this.value = parseFloat(this.value).toFixed(2)' />";
-    $html .= "<script>$('#{$this->id}').val(parseFloat($('#{$this->id}').val()).toFixed(2))</script>";
-    return $html;
-  }
-
   public function ___renderValue()
   {
     return $this->rockmoney()->parse($this->value);
@@ -56,7 +42,7 @@ class InputfieldRockMoney extends InputfieldText
   protected function setAttributeValue($value)
   {
     if ($value instanceof Money) return $value->getFloat();
-    return 0;
+    return $value;
   }
 
   /**
@@ -65,9 +51,22 @@ class InputfieldRockMoney extends InputfieldText
    */
   public function ___processInput($input)
   {
-    $val = $input->get($this->name);
-    $money = $this->rockmoney()->parse($val ?: 0);
-    $input->set($this->name, $money);
+    $val = trim($input->get($this->name));
+    $field = $this->wire->fields->get($this->name);
+
+    if (!is_numeric($val)) $val = '';
+
+    if ($val !== '') {
+      // we have a value so we try to parse it
+      $money = $this->rockmoney()->parse($val);
+      $input->set($this->name, $money);
+    } else {
+      if ($field->zeroNotEmpty) {
+        // zero and blank mean different things
+        // we don't change anything, which will remove the db row
+      } else $input->set($this->name, 0);
+    }
+
     parent::___processInput($input);
   }
 

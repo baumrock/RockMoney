@@ -72,6 +72,7 @@ class Money extends Wire
     $str = ltrim($str, "0"); // remove leading zeros
 
     // bd($str, $_str);
+    if (!is_numeric($str)) $str = 0;
 
     // create MoneyPhp object
     $curr = $this->rockmoney()->currency;

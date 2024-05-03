@@ -41,3 +41,9 @@ echo $money
   ->format(decimal: '#', prefix: 'TEST: ', suffix: '!!');
 // Output: TEST: 5#50 !!
 ```
+
+## zeroNotEmpty
+
+Sometimes zero (0) and blank ('') are not the same. For example you might want an optional price field that only shows up when filled out and to be hidden when empty. This is only possible if an empty field does not automatically show a price like 0,00€.
+
+You choose between both behaviours in the field's settings. Blank values are possible if you choose `No - Blank and 0 have different meanings`.
