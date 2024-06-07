@@ -245,6 +245,14 @@ class RockMoney extends WireData implements Module, ConfigurableModule
     $fs->icon = "code";
     $inputfields->add($fs);
 
+    $url = $this->wire->config->urls($this) . 'lib/currency.min.js';
+    $this->wire->config->scripts->add($url);
+    $fs->add([
+      'type' => 'markup',
+      'label' => 'Preview',
+      'value' => $this->wire->files->render(__DIR__ . '/preview.php'),
+    ]);
+
     $fs->add([
       'type' => 'text',
       'name' => 'thousands',
