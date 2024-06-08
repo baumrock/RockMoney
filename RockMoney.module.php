@@ -20,9 +20,9 @@ function rockmoney($value = null): RockMoney|Money
 
 class RockMoney extends WireData implements Module, ConfigurableModule
 {
-  public $locale = 'de-AT';
+  public $locale;
   public $currency;
-  public $currencyStr = 'EUR';
+  public $currencyStr;
   public $money;
 
   public function init()
@@ -33,6 +33,9 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       $this->currency = new Currency($this->currencyStr);
     } catch (\Throwable $th) {
     }
+
+    $this->locale = $this->locale ?: 'de-AT';
+    $this->currencyStr = $this->currencyStr ?: 'EUR';
 
     // add $rockmoney API variable
     // if typecasted to string it returns the settings data-attribute
