@@ -12,8 +12,9 @@ use RockMoney\Money;
  * @link https://www.baumrock.com
  */
 
-function rockmoney(): RockMoney
+function rockmoney($value = null): RockMoney|Money
 {
+  if ($value !== null) return rockmoney()->parse($value);
   return wire()->modules->get('RockMoney');
 }
 
@@ -32,6 +33,10 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       $this->currency = new Currency($this->currencyStr);
     } catch (\Throwable $th) {
     }
+
+    // add $rockmoney API variable
+    // if typecasted to string it returns the settings data-attribute
+    $this->wire('rockmoney', $this);
 
     // create minified js via RockMigrations
     $rm = $this->wire->modules->isInstalled('RockMigrations');
@@ -58,6 +63,16 @@ class RockMoney extends WireData implements Module, ConfigurableModule
   {
     if ($data instanceof Money) return $data;
     return new Money($data, $decimal);
+  }
+
+  public function settings(): string
+  {
+    return "data-rockmoney='locale:{$this->locale};currency:{$this->currencyStr}'";
+  }
+
+  public function __toString()
+  {
+    return $this->settings();
   }
 
   /** config */

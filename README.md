@@ -27,6 +27,30 @@ db($x - $y); // 0.9999999999999999 (not 1!)
 
 All money objects will be automatically formatted according to the module settings.
 
+### PHP (Backend)
+
+```php
+echo rockmoney()->parse(100);
+```
+
+### JS (Frontend)
+
+```js
+console.log(new RockMoney(100).format());
+```
+
+RockMoney will grab the settings for formatting prices on the frontend from the html dom element:
+
+```php
+<html <?= $rockmoney ?>>
+```
+
+Which will output something like this:
+
+```html
+<html data-rockmoney='locale:en-US;currency:USD'>
+```
+
 #### String Casting
 
 RockMoney objects will automatically format themselves when requested for output:

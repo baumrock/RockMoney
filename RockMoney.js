@@ -1,20 +1,32 @@
 class RockMoney {
   constructor(value) {
+    this.locale = "de-AT";
+    this.currencyStr = "EUR";
     this.currency = currency(value);
 
+    // load settings from data-rockmoney attribute on <html> element
+    // override locale + currencyStr
     let data =
       document.querySelector("html").getAttribute("data-rockmoney") || "";
     const params = new URLSearchParams(data.replace(/;/g, "&"));
-    const locale = params.get("locale") || "de-AT";
-    const curr = params.get("currency") || "EUR";
-    this.formatter = new Intl.NumberFormat(locale, {
+    for (const [key, value] of params.entries()) {
+      let [firstpart, secondpart] = key.split(":").map((part) => part.trim());
+      if (firstpart === "currency") firstpart = "currencyStr";
+      this[firstpart] = secondpart;
+    }
+
+    this.formatter = new Intl.NumberFormat(this.locale, {
       style: "currency",
-      currency: curr,
+      currency: this.currencyStr,
     });
   }
 
   by(val) {
     return new RockMoney(this.currency.value / val);
+  }
+
+  format() {
+    return this.toLocale();
   }
 
   minus(val) {
