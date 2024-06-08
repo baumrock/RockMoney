@@ -28,7 +28,6 @@ class RockMoney extends WireData implements Module, ConfigurableModule
   {
     require_once "Money.php";
     require_once "vendor/autoload.php";
-    $this->wire('money', $this);
     try {
       $this->currency = new Currency($this->currencyStr);
     } catch (\Throwable $th) {
