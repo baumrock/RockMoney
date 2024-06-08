@@ -25,6 +25,10 @@ class RockMoney {
     return new RockMoney(this.currency.value / val);
   }
 
+  float() {
+    return this.currency.value;
+  }
+
   format() {
     return this.toLocale();
   }
