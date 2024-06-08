@@ -3,6 +3,7 @@
 namespace ProcessWire;
 
 use Money\Currency;
+use NumberFormatter;
 use RockMoney\Money;
 
 /**
@@ -18,12 +19,9 @@ function rockmoney(): RockMoney
 
 class RockMoney extends WireData implements Module, ConfigurableModule
 {
-  public $decimal = ",";
-  public $thousands = ".";
-  public $suffix = "€";
-  public $prefix = "";
+  public $locale = 'de-AT';
   public $currency;
-  public $currencyStr = "EUR";
+  public $currencyStr = 'EUR';
   public $money;
 
   public function init()
@@ -35,6 +33,23 @@ class RockMoney extends WireData implements Module, ConfigurableModule
       $this->currency = new Currency($this->currencyStr);
     } catch (\Throwable $th) {
     }
+
+    // create minified js via RockMigrations
+    $rm = $this->wire->modules->isInstalled('RockMigrations');
+    if ($this->wire->user->isSuperuser() && $rm) {
+      try {
+        $rm = rockmigrations();
+        $rm->minify(__DIR__ . '/RockMoney.js');
+      } catch (\Throwable $th) {
+        $this->log($th->getMessage());
+      }
+    }
+  }
+
+  public function format($value): string
+  {
+    $f = new NumberFormatter($this->locale, NumberFormatter::CURRENCY);
+    return $f->formatCurrency($value, $this->currencyStr);
   }
 
   /**
@@ -68,11 +83,26 @@ class RockMoney extends WireData implements Module, ConfigurableModule
         </ul>",
     ]);
 
+    foreach ([
+      $this->wire->config->urls($this) . 'lib/currency.min.js',
+      $this->wire->config->urls($this) . 'RockMoney.min.js',
+    ] as $url) {
+      $url = $this->wire->config->versionUrl($url, true);
+      $this->wire->config->scripts->add($url);
+    }
+
+    $inputfields->add([
+      'type' => 'markup',
+      'label' => 'Preview',
+      'value' => $this->format(12345.67),
+    ]);
+
     $curr = new InputfieldSelect();
     $curr->label = "Currency";
     $curr->icon = "money";
     $curr->name = "currencyStr";
-    $curr->notes = "The currency is set globally for all objects.";
+    $curr->notes = "The currency is set globally for all objects. Default is EUR.";
+    $curr->columnWidth = 50;
     $curr->addOptions([
       "AED" => "AED - United Arab Emirates dirham",
       "AFN" => "AFN - Afghan afghani",
@@ -240,52 +270,14 @@ class RockMoney extends WireData implements Module, ConfigurableModule
     $curr->value = $this->currencyStr;
     $inputfields->add($curr);
 
-    $fs = new InputfieldFieldset();
-    $fs->label = "Formatting";
-    $fs->icon = "code";
-    $inputfields->add($fs);
-
-    $url = $this->wire->config->urls($this) . 'lib/currency.min.js';
-    $this->wire->config->scripts->add($url);
-    $fs->add([
-      'type' => 'markup',
-      'label' => 'Preview',
-      'value' => $this->wire->files->render(__DIR__ . '/preview.php'),
-    ]);
-
-    $fs->add([
+    $inputfields->add([
       'type' => 'text',
-      'name' => 'thousands',
-      'label' => 'Thousands Separator',
-      'value' => $this->thousands,
-      'columnWidth' => 25,
-    ]);
-    $fs->add([
-      'type' => 'text',
-      'name' => 'decimal',
-      'label' => 'Decimal Separator',
-      'value' => $this->decimal,
-      'columnWidth' => 25,
-    ]);
-    $fs->add([
-      'type' => 'text',
-      'name' => 'prefix',
-      'label' => 'Prefix Symbol',
-      'value' => $this->prefix,
-      'columnWidth' => 25,
-    ]);
-    $fs->add([
-      'type' => 'text',
-      'name' => 'suffix',
-      'label' => 'Suffix Symbol',
-      'value' => $this->suffix,
-      'columnWidth' => 25,
-    ]);
-    $fs->add([
-      'type' => 'checkbox',
-      'name' => 'space',
-      'label' => 'Space between symbol and number',
-      'checked' => $this->space ? 'checked' : '',
+      'name' => 'locale',
+      'label' => 'Locale',
+      'columnWidth' => 50,
+      'icon' => 'globe',
+      'notes' => 'The locale used for formatting prices. Default is de-AT.',
+      'value' => $this->locale,
     ]);
 
     return $inputfields;
