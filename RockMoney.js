@@ -22,7 +22,7 @@ class RockMoney {
   }
 
   by(val) {
-    return new RockMoney(this.currency.value / val);
+    return new RockMoney(this.currency.divide(val));
   }
 
   float() {
@@ -34,15 +34,15 @@ class RockMoney {
   }
 
   minus(val) {
-    return new RockMoney(this.currency.value - val);
+    return new RockMoney(this.currency.substract(val));
   }
 
   plus(val) {
-    return new RockMoney(this.currency.value + val);
+    return new RockMoney(this.currency.add(val));
   }
 
   times(val) {
-    return new RockMoney(this.currency.value * val);
+    return new RockMoney(this.currency.multiply(val));
   }
 
   toLocale() {
