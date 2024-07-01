@@ -6,6 +6,8 @@ use Money\Money as MoneyMoney;
 use ProcessWire\RockMoney;
 use ProcessWire\Wire;
 
+use function ProcessWire\rockmoney;
+
 class Money extends Wire
 {
   /** @var MoneyMoney */
@@ -72,6 +74,7 @@ class Money extends Wire
     $str = ltrim($str, "0"); // remove leading zeros
 
     // bd($str, $_str);
+    if (!is_numeric($str)) $str = 0;
 
     // create MoneyPhp object
     $curr = $this->rockmoney()->currency;
@@ -84,31 +87,13 @@ class Money extends Wire
   /**
    * Format this money object for ouput
    */
-  public function format(
-    $thousands = null,
-    $decimal = null,
-    $prefix = null,
-    $suffix = null,
-    $space = null
-  ): string {
-    $m = $this->rockmoney();
-
-    // prepare format
-    $thousands = $thousands ?: $m->thousands;
-    $decimal = $decimal ?: $m->decimal;
-    $prefix = $prefix ?: $m->prefix;
-    $suffix = $suffix ?: $m->suffix;
-    $space = $space ?: $m->space;
-
-    $amount = $this->money->getAmount();
-    $str = number_format($amount / 100, 2, $decimal, $thousands);
-    $space = $space ? " " : "";
-    $str = $prefix . $space . $str . $space . $suffix;
-    return trim($str);
+  public function format(): string
+  {
+    return rockmoney()->format($this->getFloat());
   }
 
   /**
-   * Get a string in the format that mollie needs it
+   * Get a string in the format that mollie needs
    */
   public function formatMollie(): string
   {

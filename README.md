@@ -4,10 +4,8 @@ ProcessWire Module to provide tools for storing and using monetary values in an 
 
 ## Usage
 
-RockMoney will register a new API variable `$money` that you can use to work with money values:
-
 ```php
-echo $money
+echo rockmoney()
   ->parse("1,4")
   ->minus(0.4)
   ->format(); // 1,00€
@@ -29,12 +27,36 @@ db($x - $y); // 0.9999999999999999 (not 1!)
 
 All money objects will be automatically formatted according to the module settings.
 
+### PHP (Backend)
+
+```php
+echo rockmoney()->parse(100);
+```
+
+### JS (Frontend)
+
+```js
+console.log(new RockMoney(100).format());
+```
+
+RockMoney will grab the settings for formatting prices on the frontend from the html dom element:
+
+```php
+<html <?= $rockmoney ?>>
+```
+
+Which will output something like this:
+
+```html
+<html data-rockmoney='locale:en-US;currency:USD'>
+```
+
 #### String Casting
 
 RockMoney objects will automatically format themselves when requested for output:
 
 ```php
-$net = $money->parse(100);
+$net = rockmoney()->parse(100);
 bd($net); // RockMoney\Money object
 echo $net; // 100,00€
 ```
@@ -42,7 +64,7 @@ echo $net; // 100,00€
 ## Calculations
 
 ```php
-$money
+rockmoney()
   ->parse("14,40")
   ->plus(3)
   ->minus(0.4)
@@ -54,7 +76,7 @@ $money
 Note that every calculation will return a new money object instead of modifying the original object. This is important for situations like this one:
 
 ```php
-$net = $money->parse("1.499");
+$net = rockmoney()->parse("1.499");
 $vat = $net->times(0.2); // $net is still 1499
 $gross = $net->plus($vat); // $net is still 1499
 echo "net: $net"; // 1.499,00€
@@ -65,7 +87,7 @@ echo "gross: $gross"; // 1.798,80€
 ## Comparisons
 
 ```php
-$net = $money->parse(100);
+$net = rockmoney()->parse(100);
 $vat = $net->times(0.2);
 $gross = $net->times(1.2);
 $gross2 = $net->plus($vat);
