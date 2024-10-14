@@ -32,7 +32,7 @@ class Money extends Wire
 
     // first we remove all non-numeric and non-dot values
     // but we keep a starting dash as it means negative values
-    if (preg_match('/-?[0-9.,]+/', $str, $matches)) {
+    if (preg_match('/-?[0-9.,]+/', (string)$str, $matches)) {
       $str = $matches[0];
     }
 
@@ -61,7 +61,7 @@ class Money extends Wire
       // 1,450 = 145000 cents
       // 1,450.00 = 145000 cents
       // then we normalise the decimal and remove thousands separators
-      $str = preg_replace('/(?<=\d)[,.](?=\d{3}\b)/', '', $str);
+      $str = preg_replace('/(?<=\d)[,.](?=\d{3}\b)/', '', (string)$str);
       // then we make sure we have a dot as decimal point
       $str = str_replace(",", ".", $str);
     }
