@@ -2,6 +2,7 @@
 
 namespace RockMoney;
 
+use Money\Currency;
 use Money\Money as MoneyMoney;
 use ProcessWire\RockMoney;
 use ProcessWire\Wire;
@@ -77,7 +78,7 @@ class Money extends Wire
     if (!is_numeric($str)) $str = 0;
 
     // create MoneyPhp object
-    $curr = $this->rockmoney()->currency;
+    $curr = $this->rockmoney()->currency ?: new Currency('EUR');
     $money = new MoneyMoney($str ?: 0, $curr);
     $this->money = $money;
 
