@@ -12,20 +12,6 @@ use RockMoney\Money;
 class InputfieldRockMoney extends InputfieldText
 {
 
-  public static function getModuleInfo()
-  {
-    return [
-      'title' => 'RockMoney Inputfield',
-      'version' => '0.0.1',
-      'summary' => 'Inputfield for RockMoney',
-      'icon' => 'money',
-      'requires' => [
-        'RockMoney',
-      ],
-      'installs' => [],
-    ];
-  }
-
   public function ___renderValue()
   {
     return $this->rockmoney()->parse($this->value);

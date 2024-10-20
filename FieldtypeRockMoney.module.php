@@ -12,20 +12,6 @@ use RockMoney\Money;
 class FieldtypeRockMoney extends FieldtypeFloat
 {
 
-  public static function getModuleInfo()
-  {
-    return [
-      'title' => 'RockMoney',
-      'version' => '0.0.1',
-      'summary' => 'RockMoney Fieldtype',
-      'icon' => 'money',
-      'requires' => [
-        'RockMoney',
-      ],
-      'installs' => [],
-    ];
-  }
-
   public function init()
   {
     parent::init();

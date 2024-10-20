@@ -1,25 +1,8 @@
 # RockMoney
 
-ProcessWire Module to provide tools for storing and using monetary values in an easy, yet powerful way. This module is based on https://github.com/moneyphp/money
+RockMoney provides tools for storing and using monetary values in an easy, yet powerful way. This module is based on https://github.com/moneyphp/money and a required module for [RockCommerce](https://www.baumrock.com/RockCommerce), which uses it to handle all prices.
 
-## Usage
-
-```php
-echo rockmoney()
-  ->parse("1,4")
-  ->minus(0.4)
-  ->format(); // 1,00€
-```
-
-## Why?
-
-Because using floats can lead to severe problems! Compare the previous examle with this one:
-
-```php
-$x = 1.4;
-$y = 0.4;
-db($x - $y); // 0.9999999999999999 (not 1!)
-```
+Please see the docs at [baumrock.com/RockMoney](https://www.baumrock.com/RockMoney)
 
 ## Parsing
 
@@ -100,9 +83,3 @@ bd($gross->isEqual($gross2)); // true
 // find invoices with net value smaller than 100€
 $pages->find("template=invoice, net<100");
 ```
-
-## Links
-
-https://entwickler.de/php/moneyphp-internationale-transaktionen-leicht-gemacht
-https://www.moneyphp.org/en/stable/index.html
-https://www.php.net/manual/en/class.numberformatter.php

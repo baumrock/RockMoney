@@ -1,49 +1,30 @@
 # RockMoney
 
-RockMoney is a module that provides a simple and efficient way to handle money and currency in your applications. It supports parsing from strings, floats and provides methods for arithmetic operations.
+RockMoney provides tools for storing and using monetary values in an easy, yet powerful way. This module is based on https://github.com/moneyphp/money and a required module for [RockCommerce](https://www.baumrock.com/RockCommerce), which uses it to handle all prices.
 
-Please note that using floats instead of money objects can lead to wrong results due to the way PHP handles floating point arithmetic.
-
-Here are some examples of how to use the RockMoney module:
+## Usage
 
 ```php
-// Parsing from a string with three numbers after a dot or comma, it will be parsed as thousands
-echo $money->parse("1.001")->format();
-// Output: 1.001,00 €
-
-// Parsing from a PHP float, it will be parsed as float and rounded to cents
-echo $money->parse(1.001)->format();
-// Output: 1,00 €
-
-// Arithmetic operations are supported
-echo $money->parse("5,5")
-  ->times(3)
-  ->minus(2.5)
-  ->plus(0.2)
-  ->format();
-// Output: 14,20 €
-
-// Parsing from a string with a currency symbol
-echo $money->parse("€ 1,234")->format();
-// Output: 1.234,00 €
-
-// Immutability is supported
-$net = $money->parse("1.499");
-$vat = $net->times(0.2);
-$gross = $net->plus($vat);
-echo "net: $net";     // Output: net: 1.499,00 €
-echo "vat: $vat";     // Output: vat: 299,80 €
-echo "gross: $gross"; // Output: gross: 1.798,80 €
-
-// Manual formatting is supported
-echo $money
-  ->parse("5,5")
-  ->format(decimal: '#', prefix: 'TEST: ', suffix: '!!');
-// Output: TEST: 5#50 !!
+echo rockmoney()
+  ->parse("1,4")
+  ->minus(0.4)
+  ->format(); // 1,00€
 ```
 
-## zeroNotEmpty
+## Why?
 
-Sometimes zero (0) and blank ('') are not the same. For example you might want an optional price field that only shows up when filled out and to be hidden when empty. This is only possible if an empty field does not automatically show a price like 0,00€.
+The simple answer is, because **0.1 + 0.2 is not 0.3** in computer world:
 
-You choose between both behaviours in the field's settings. Blank values are possible if you choose `No - Blank and 0 have different meanings`.
+<img src=https://i.imgur.com/xsFjHPJ.png class=blur height=200>
+
+This behaviour is caused by computers calculating numbers in binary, not in decimal as we are used to. This leads to some numbers like 0.2 being periodic in binary, which will cause rounding issues all over.
+
+Things might look correct 99% of the time, but suddenly you might get "wrong" results like this and you are knee deep in trouble:
+
+<img src=https://i.imgur.com/Nyh4JzW.png class=blur height=600>
+
+## Links
+
+https://entwickler.de/php/moneyphp-internationale-transaktionen-leicht-gemacht
+https://www.moneyphp.org/en/stable/index.html
+https://www.php.net/manual/en/class.numberformatter.php
