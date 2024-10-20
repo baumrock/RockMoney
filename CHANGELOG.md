@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/baumrock/RockMoney/compare/v2.0.0...v2.0.1) (2024-10-20)
+
+
+### Bug Fixes
+
+* improve docs and refactoring ([359fd56](https://github.com/baumrock/RockMoney/commit/359fd56b92c53ff049b53c370c78b0e8ccb59216))
+* type errors if string is null ([c5f6fc2](https://github.com/baumrock/RockMoney/commit/c5f6fc21244bc6468e49d0cc3d5190fb9988b6e4))
+
 ## [2.0.0](https://github.com/baumrock/RockMoney/compare/v1.3.0...v2.0.0) (2024-07-01)
 
 
@@ -54,11 +62,4 @@
 ### Bug Fixes
 
 * examples with euro sign throwing errors ([e27202c](https://github.com/baumrock/RockMoney/commit/e27202c3b3bb74bf21c00ba0774b78c249791ccf))
-
-## [1.0.1](https://github.com/baumrock/RockMoney/compare/2b857e90b44d07dedc241a9a45f417ce3f0709a0...v1.0.1) (2023-03-19)
-
-
-### Bug Fixes
-
-* parsing negative values ([2b857e9](https://github.com/baumrock/RockMoney/commit/2b857e90b44d07dedc241a9a45f417ce3f0709a0))
 
