@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/baumrock/RockMoney/compare/v2.0.2...v2.0.3) (2024-10-20)
+
+
+### Bug Fixes
+
+* add default currency if not set ([55cbe23](https://github.com/baumrock/RockMoney/commit/55cbe23751c3771afe90d91c658fa5017fbbd14a))
+
 ## [2.0.2](https://github.com/baumrock/RockMoney/compare/v2.0.1...v2.0.2) (2024-10-20)
 
 
@@ -50,11 +57,4 @@
 ### Bug Fixes
 
 * getString must not return thousands separator ([8a2e226](https://github.com/baumrock/RockMoney/commit/8a2e2263c5fd03793e697575ee2668fc6c00292d))
-
-## [1.2.0](https://github.com/baumrock/RockMoney/compare/v1.1.0...v1.2.0) (2024-01-03)
-
-
-### Features
-
-* add functions api ([6f30fbc](https://github.com/baumrock/RockMoney/commit/6f30fbc3ec1ae3b6e0245685203db59276d8c1c1))
 
