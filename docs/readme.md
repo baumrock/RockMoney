@@ -15,7 +15,7 @@ See detailed usage instructions in the dedicated section.
 
 ## Why?
 
-The simple answer is, because **0.1 + 0.2 is not 0.3** in computer world:
+The short answer is, because **0.1 + 0.2 is not 0.3** in computer world:
 
 <img src=https://i.imgur.com/xsFjHPJ.png class=blur height=200>
 
