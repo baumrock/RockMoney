@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/baumrock/RockMoney/compare/v2.0.1...v2.0.2) (2024-10-20)
+
+
+### Bug Fixes
+
+* update docs ([02d42c4](https://github.com/baumrock/RockMoney/commit/02d42c4b6cd4942a084080e2ef8e627af6ada9b0))
+
 ## [2.0.1](https://github.com/baumrock/RockMoney/compare/v2.0.0...v2.0.1) (2024-10-20)
 
 
@@ -50,16 +57,4 @@
 ### Features
 
 * add functions api ([6f30fbc](https://github.com/baumrock/RockMoney/commit/6f30fbc3ec1ae3b6e0245685203db59276d8c1c1))
-
-## [1.1.0](https://github.com/baumrock/RockMoney/compare/v1.0.1...v1.1.0) (2023-09-11)
-
-
-### Features
-
-* add formatMollie() ([2ec5ab2](https://github.com/baumrock/RockMoney/commit/2ec5ab2e933ec008dfb3092c00c8f325cc2714a8))
-
-
-### Bug Fixes
-
-* examples with euro sign throwing errors ([e27202c](https://github.com/baumrock/RockMoney/commit/e27202c3b3bb74bf21c00ba0774b78c249791ccf))
 
