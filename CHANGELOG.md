@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/baumrock/RockMoney/compare/v2.0.3...v2.0.4) (2024-12-03)
+
+
+### Bug Fixes
+
+* load autoloader earlier ([a33e824](https://github.com/baumrock/RockMoney/commit/a33e824cf11286efab05197095a10435524e3fd9))
+
 ## [2.0.3](https://github.com/baumrock/RockMoney/compare/v2.0.2...v2.0.3) (2024-10-20)
 
 
@@ -43,18 +50,4 @@
 * RockMoney.js not grabbing settings from <html> element ([4419814](https://github.com/baumrock/RockMoney/commit/44198140c2591493331604117bf500d7bf9adcc2))
 * use currency for calculations ([b95daab](https://github.com/baumrock/RockMoney/commit/b95daab4b0fa212c858a0b936b17b65752d3c115))
 * zero and blank are not the same ([eccf778](https://github.com/baumrock/RockMoney/commit/eccf77859db2f7a97780178b4699f18b2e0a184d))
-
-## [1.3.0](https://github.com/baumrock/RockMoney/compare/v1.2.0...v1.3.0) (2024-02-04)
-
-
-### Features
-
-* add getString() method ([3aa88fa](https://github.com/baumrock/RockMoney/commit/3aa88fa090067e9773e72cdff93c7af7db56ea4d))
-* make inputfield show prices as .toFixed(2) ([d2df029](https://github.com/baumrock/RockMoney/commit/d2df029b6e1bc49803d7c8df113d83ae531f3cb0))
-* select value on focus or click ([f01adf6](https://github.com/baumrock/RockMoney/commit/f01adf678dd4109e35d277106001504a4e3ac1eb))
-
-
-### Bug Fixes
-
-* getString must not return thousands separator ([8a2e226](https://github.com/baumrock/RockMoney/commit/8a2e2263c5fd03793e697575ee2668fc6c00292d))
 
