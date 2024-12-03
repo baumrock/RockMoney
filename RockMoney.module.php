@@ -18,6 +18,8 @@ function rockmoney($value = null): RockMoney|Money
   return wire()->modules->get('RockMoney');
 }
 
+require_once "Money.php";
+require_once "vendor/autoload.php";
 class RockMoney extends WireData implements Module, ConfigurableModule
 {
   public $locale;
@@ -27,8 +29,6 @@ class RockMoney extends WireData implements Module, ConfigurableModule
 
   public function init()
   {
-    require_once "Money.php";
-    require_once "vendor/autoload.php";
     try {
       $this->currency = new Currency($this->currencyStr);
     } catch (\Throwable $th) {
@@ -100,10 +100,12 @@ class RockMoney extends WireData implements Module, ConfigurableModule
         </ul>",
     ]);
 
-    foreach ([
-      $this->wire->config->urls($this) . 'lib/currency.min.js',
-      $this->wire->config->urls($this) . 'RockMoney.min.js',
-    ] as $url) {
+    foreach (
+      [
+        $this->wire->config->urls($this) . 'lib/currency.min.js',
+        $this->wire->config->urls($this) . 'RockMoney.min.js',
+      ] as $url
+    ) {
       $url = $this->wire->config->versionUrl($url, true);
       $this->wire->config->scripts->add($url);
     }
