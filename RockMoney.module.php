@@ -55,8 +55,12 @@ class RockMoney extends WireData implements Module, ConfigurableModule
 
   public function format($value): string
   {
-    $f = new NumberFormatter($this->locale, NumberFormatter::CURRENCY);
-    return $f->formatCurrency($value, $this->currencyStr);
+    try {
+      $f = new NumberFormatter($this->locale, NumberFormatter::CURRENCY);
+      return $f->formatCurrency($value, $this->currencyStr);
+    } catch (\Throwable $th) {
+      throw new WireException("Your system does not support NumberFormatter - Please install the Intl extension for PHP.");
+    }
   }
 
   /**

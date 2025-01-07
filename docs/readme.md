@@ -13,6 +13,10 @@ echo rockmoney()
 
 See detailed usage instructions in the dedicated section.
 
+## Requirements
+
+<div class='uk-alert uk-alert-warning'>This module requires PHP8+ with the Intl extension.</div>
+
 ## Why?
 
 The short answer is, because **0.1 + 0.2 is not 0.3** in computer world:
