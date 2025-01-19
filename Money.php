@@ -122,6 +122,15 @@ class Money extends Wire
     return number_format($float, $decimals, ".", "");
   }
 
+  public function mollieAmountArray(): array
+  {
+    // return array with amount and currency
+    return [
+      "value" => $this->getString(),
+      "currency" => (string)($this->rockmoney()->currency ?: new Currency('EUR')),
+    ];
+  }
+
   /** calculations */
 
   public function minus($amount): self
