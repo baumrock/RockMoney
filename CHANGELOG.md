@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/baumrock/RockMoney/compare/v3.0.0...v3.0.1) (2025-02-23)
+
+
+### Bug Fixes
+
+* update minified file ([24da36f](https://github.com/baumrock/RockMoney/commit/24da36f6cd76e76e8e8baeef0c3fd6fe2dde03f3))
+
 ## [3.0.0](https://github.com/baumrock/RockMoney/compare/v2.1.0...v3.0.0) (2025-02-23)
 
 
@@ -29,11 +36,4 @@
 ### Bug Fixes
 
 * load autoloader earlier ([a33e824](https://github.com/baumrock/RockMoney/commit/a33e824cf11286efab05197095a10435524e3fd9))
-
-## [2.0.3](https://github.com/baumrock/RockMoney/compare/v2.0.2...v2.0.3) (2024-10-20)
-
-
-### Bug Fixes
-
-* add default currency if not set ([55cbe23](https://github.com/baumrock/RockMoney/commit/55cbe23751c3771afe90d91c658fa5017fbbd14a))
 
