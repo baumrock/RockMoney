@@ -40,17 +40,28 @@ class RockMoney extends WireData implements Module, ConfigurableModule
     // add $rockmoney API variable
     // if typecasted to string it returns the settings data-attribute
     $this->wire('rockmoney', $this);
+    $this->dev();
+  }
 
-    // create minified js via RockMigrations
-    $rm = $this->wire->modules->isInstalled('RockMigrations');
-    if ($this->wire->user->isSuperuser() && $rm) {
-      try {
-        $rm = rockmigrations();
-        $rm->minify(__DIR__ . '/RockMoney.js');
-      } catch (\Throwable $th) {
-        $this->log($th->getMessage());
-      }
-    }
+  /**
+   * This method will only be executed if debug mode is enabled
+   * and $config->rockdevtools = true;
+   */
+  private function dev(): void
+  {
+    $config = wire()->config;
+    if ($config->ajax) return;
+    if ($config->external) return;
+    if (!$config->debug) return;
+    if (!$config->rockdevtools) return;
+
+    // compile all assets to one minified js file
+    if (!wire()->modules->isInstalled('RockDevTools')) return;
+    $tools = rockdevtools();
+    $tools->assets()
+      ->js()
+      ->add(__DIR__ . '/src/*.js')
+      ->save(__DIR__ . '/dst/RockMoney.min.js');
   }
 
   public function format($value): string
