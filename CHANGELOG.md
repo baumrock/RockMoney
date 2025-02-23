@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/baumrock/RockMoney/compare/v2.1.0...v3.0.0) (2025-02-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* refactor to use rockdevtools
+
+### Miscellaneous Chores
+
+* refactor to use rockdevtools ([6e06935](https://github.com/baumrock/RockMoney/commit/6e069355e26d94fcd3b0bc23c6fec76477d3be2a))
+
 ## [2.1.0](https://github.com/baumrock/RockMoney/compare/v2.0.5...v2.1.0) (2025-02-02)
 
 
@@ -25,11 +36,4 @@
 ### Bug Fixes
 
 * add default currency if not set ([55cbe23](https://github.com/baumrock/RockMoney/commit/55cbe23751c3771afe90d91c658fa5017fbbd14a))
-
-## [2.0.2](https://github.com/baumrock/RockMoney/compare/v2.0.1...v2.0.2) (2024-10-20)
-
-
-### Bug Fixes
-
-* update docs ([02d42c4](https://github.com/baumrock/RockMoney/commit/02d42c4b6cd4942a084080e2ef8e627af6ada9b0))
 
