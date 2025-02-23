@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/baumrock/RockMoney/compare/v3.0.1...v3.0.2) (2025-02-23)
+
+
+### Bug Fixes
+
+* typo in minus() method ([4bdaa0e](https://github.com/baumrock/RockMoney/commit/4bdaa0efe5c5d4699f496b4f45c1dcf97f78c063))
+
 ## [3.0.1](https://github.com/baumrock/RockMoney/compare/v3.0.0...v3.0.1) (2025-02-23)
 
 
@@ -29,11 +36,4 @@
 ### Bug Fixes
 
 * add check for Intl extension ([ca40edd](https://github.com/baumrock/RockMoney/commit/ca40edd93e3534d7f7e2bd3e7f55babd02b7c77b))
-
-## [2.0.4](https://github.com/baumrock/RockMoney/compare/v2.0.3...v2.0.4) (2024-12-03)
-
-
-### Bug Fixes
-
-* load autoloader earlier ([a33e824](https://github.com/baumrock/RockMoney/commit/a33e824cf11286efab05197095a10435524e3fd9))
 
