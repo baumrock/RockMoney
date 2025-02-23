@@ -34,7 +34,7 @@ class RockMoney {
   }
 
   minus(val) {
-    return new RockMoney(this.currency.substract(val));
+    return new RockMoney(this.currency.subtract(val));
   }
 
   plus(val) {
