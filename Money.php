@@ -101,6 +101,12 @@ class Money extends Wire
     return number_format($this->getFloat(), 2, ".", "");
   }
 
+  public function getAmount(): int
+  {
+    if (!$this->money) return 0;
+    return $this->money->getAmount();
+  }
+
   /**
    * Get a float rounded to the given number of decimals
    */
