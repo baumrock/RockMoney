@@ -1,3 +1,15 @@
+## [3.1.0](https://github.com/baumrock/RockMoney/compare/v3.0.2...v3.1.0) (2025-05-01)
+
+
+### Features
+
+* add getAmount() api method ([454dedb](https://github.com/baumrock/RockMoney/commit/454dedb3d38a9257edeecc1392aff8fdd463a84d))
+
+
+### Bug Fixes
+
+* add __DIR__ to make autoloader more robust [#1](https://github.com/baumrock/RockMoney/issues/1) ([7fef5f1](https://github.com/baumrock/RockMoney/commit/7fef5f1754623efc9c41fd740a747620cac34748))
+
 ## [3.0.2](https://github.com/baumrock/RockMoney/compare/v3.0.1...v3.0.2) (2025-02-23)
 
 
@@ -29,11 +41,4 @@
 ### Features
 
 * add mollieAmountArray() method ([8190fbd](https://github.com/baumrock/RockMoney/commit/8190fbdaf6606eb9df96736711ad5995f08f2e55))
-
-## [2.0.5](https://github.com/baumrock/RockMoney/compare/v2.0.4...v2.0.5) (2025-01-07)
-
-
-### Bug Fixes
-
-* add check for Intl extension ([ca40edd](https://github.com/baumrock/RockMoney/commit/ca40edd93e3534d7f7e2bd3e7f55babd02b7c77b))
 
