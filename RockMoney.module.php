@@ -18,8 +18,8 @@ function rockmoney($value = null): RockMoney|Money
   return wire()->modules->get('RockMoney');
 }
 
-require_once "Money.php";
-require_once "vendor/autoload.php";
+require_once __DIR__ . '/Money.php';
+require_once __DIR__ . '/vendor/autoload.php';
 class RockMoney extends WireData implements Module, ConfigurableModule
 {
   public $locale;
