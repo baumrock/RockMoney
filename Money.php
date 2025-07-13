@@ -183,6 +183,11 @@ class Money extends Wire
     return $this->money->lessThanOrEqual($money->money);
   }
 
+  public function isNotEqual($money): bool
+  {
+    return !$this->isEqual($money);
+  }
+
   public function isEqual($money): bool
   {
     $money = $this->rockmoney()->parse($money);
