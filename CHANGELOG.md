@@ -1,3 +1,10 @@
+## [3.2.0](https://github.com/baumrock/RockMoney/compare/v3.1.0...v3.2.0) (2025-08-02)
+
+
+### Features
+
+* add isNotEqual method ([5715324](https://github.com/baumrock/RockMoney/commit/57153248442a64f1ee8171e28e8cd9f1db70fa9f))
+
 ## [3.1.0](https://github.com/baumrock/RockMoney/compare/v3.0.2...v3.1.0) (2025-05-01)
 
 
@@ -34,11 +41,4 @@
 ### Miscellaneous Chores
 
 * refactor to use rockdevtools ([6e06935](https://github.com/baumrock/RockMoney/commit/6e069355e26d94fcd3b0bc23c6fec76477d3be2a))
-
-## [2.1.0](https://github.com/baumrock/RockMoney/compare/v2.0.5...v2.1.0) (2025-02-02)
-
-
-### Features
-
-* add mollieAmountArray() method ([8190fbd](https://github.com/baumrock/RockMoney/commit/8190fbdaf6606eb9df96736711ad5995f08f2e55))
 
